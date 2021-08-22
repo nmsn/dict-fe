@@ -4,6 +4,8 @@ import styled from "styled-components";
 import DictSearchItem from "@/components/DictSearchItem";
 import DictSearchInput from "@/components/DictSearchInput";
 import DictStatItem from "@/components/DictStatItem";
+import { useQuery } from "react-query";
+import { getYoudao } from "@/service/dict";
 
 const StyledPage = styled.div`
   width: 100vw;
@@ -29,24 +31,13 @@ const StyledBlockContainer2 = styled(StyledBlockContainer)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  
+
   > div {
     margin-bottom: 10px;
   }
 `;
 
 const Home: NextPage = () => {
-  // const { data: myInfo, isLoading, error } = useQuery('getName', getInfo, {
-  //   initialData: {
-  //     name: 'unknown',
-  //   },
-  //   onSuccess: () => console.log('请求成功~'),
-  // });
-
-  // if (isLoading) {
-  //   return <div>loading...</div>;
-  // }
-
   return (
     <StyledPage>
       <Head>

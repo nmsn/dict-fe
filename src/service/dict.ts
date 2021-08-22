@@ -11,9 +11,15 @@ const getReactQuery = async () => {
 };
 
 const getInfo = async () => {
-  const { data } = await request({ method: 'post', url: '/post' });
-
+  const { data } = await request({ method: 'post', url: '/post'});
+ 
   return data;
 };
 
-export { getReactQuery, getInfo };
+
+const getYoudao = async (word: string) => {
+  const { data } = await request.post('/dict/youdaoSearch', { word },);
+  return data;
+};
+
+export { getReactQuery, getInfo, getYoudao };
