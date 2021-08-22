@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
-import { useQuery } from 'react-query';
-import { getInfo } from '../service/dict';
+import DictSearchItem from "@/components/DictSearchItem";
+import DictSearchInput from "@/components/DictSearchInput";
+import DictStatItem from "@/components/DictStatItem";
 
 const StyledPage = styled.div`
   width: 100vw;
@@ -12,46 +13,27 @@ const StyledPage = styled.div`
 const StyledMain = styled.main`
   width: 100vw;
   padding: 100px 0;
-  
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `;
 
-const StyledDictItem = styled.div`
-  width: 300px;
-  height: 400px;
-  background: #f7ebb6;
-  padding: 20px;
-  margin: 0 10px;
-  font-weight: bold;
-  font-size: 24px;
+const StyledBlockContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
 
+const StyledBlockContainer2 = styled(StyledBlockContainer)`
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  
   > div {
     margin-bottom: 10px;
   }
-
-  .typeLabel {
-    font-size: 28px;
-  }
 `;
-
-const DictItem = ({
-  typeLabel,
-  result,
-  source,
-}: {
-  typeLabel: string;
-  result: string;
-  source: string;
-}) => {
-  return (
-    <StyledDictItem>
-      <div className="typeLabel">{typeLabel}</div>
-      <div className="source">{source}</div>
-      <div className="result">{result}</div>
-    </StyledDictItem>
-  );
-};
 
 const Home: NextPage = () => {
   // const { data: myInfo, isLoading, error } = useQuery('getName', getInfo, {
@@ -60,11 +42,11 @@ const Home: NextPage = () => {
   //   },
   //   onSuccess: () => console.log('请求成功~'),
   // });
-  
+
   // if (isLoading) {
   //   return <div>loading...</div>;
   // }
-  
+
   return (
     <StyledPage>
       <Head>
@@ -73,8 +55,17 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledMain>
-        <DictItem typeLabel="百度" result="苹果" source="apple" />
-        <DictItem typeLabel="网易" result="苹果" source="apple" />
+        <StyledBlockContainer>
+          <DictSearchInput />
+        </StyledBlockContainer>
+        <StyledBlockContainer>
+          <DictSearchItem typeLabel="百度" result="苹果" source="apple" />
+          <DictSearchItem typeLabel="有道" result="苹果" source="apple" />
+        </StyledBlockContainer>
+        <StyledBlockContainer2>
+          <DictStatItem index="1" num="1" text="apple" />
+          <DictStatItem index="1" num="1" text="apple" />
+        </StyledBlockContainer2>
       </StyledMain>
     </StyledPage>
   );
