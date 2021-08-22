@@ -54,16 +54,16 @@ const DictItem = ({
 };
 
 const Home: NextPage = () => {
-  const { data: myInfo, isLoading, error } = useQuery('getName', getInfo, {
-    initialData: {
-      name: 'unknown',
-    },
-    onSuccess: () => console.log('请求成功~'),
-  });
+  // const { data: myInfo, isLoading, error } = useQuery('getName', getInfo, {
+  //   initialData: {
+  //     name: 'unknown',
+  //   },
+  //   onSuccess: () => console.log('请求成功~'),
+  // });
   
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>loading...</div>;
+  // }
   
   return (
     <StyledPage>
