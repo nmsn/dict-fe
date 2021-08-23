@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import { getYoudao } from "@/service/dict";
+import { getWord } from "@/service/dict";
 
 const StyledSearchInputItem = styled.div`
   > input {
@@ -18,7 +18,7 @@ const DictSearchInput = () => {
   const [data, setData] = useState("");
   
   const getData = async (word: string) => {
-    const data = await getYoudao(word);
+    const data = await getWord(word);
     setData(data);
   };
   
