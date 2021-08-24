@@ -6,13 +6,13 @@ const StyledSearchInput = styled.div`
   > input {
     width: 500px;
     height: 40px;
-    border-radius: ${props => props.theme.borderRadius};
+    border-radius: ${(props) => props.theme.borderRadius};
     padding: 5px;
     font-size: 18px;
     margin-right: 20px;
-    border: 1px solid ${props => props.theme.themeTextColor};
+    border: 1px solid ${(props) => props.theme.themeTextColor};
   }
-  
+
   display: flex;
   align-items: center;
 `;
@@ -20,8 +20,8 @@ const StyledSearchInput = styled.div`
 const StyledSearchBtn = styled.button`
   height: 40px;
   padding: 10px 20px;
-  border-radius: ${props => props.theme.borderRadius};
-  background-color: skyblue;
+  border-radius: ${(props) => props.theme.borderRadius};
+  background-color: ${(props) => props.theme.themeTextColor};
   color: #fff;
   border: 0;
 `;
