@@ -4,11 +4,12 @@ const StyledStatItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: ${props => props.theme.itemPadding};
   width: 600px;
   height: 50px;
   font-size: 18px;
   background: #f7ebb6;
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 const DictStatItem = ({

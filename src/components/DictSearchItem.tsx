@@ -3,11 +3,12 @@ import styled from "styled-components";
 const StyledSearchDictItem = styled.div`
   width: 300px;
   height: 400px;
-  background: #f7ebb6;
-  padding: 20px;
+  background: ${(props) => props.theme.themeColor};
+  padding: ${(props) => props.theme.itemPadding};
   margin: 0 10px;
   font-weight: bold;
   font-size: 24px;
+  border-radius: ${(props) => props.theme.borderRadius};
 
   > div {
     margin-bottom: 10px;
@@ -18,7 +19,10 @@ const StyledSearchDictItem = styled.div`
   }
 `;
 
-const typeMap = new Map([['youdao', '有道'], ['baidu', '百度']]);
+const typeMap = new Map([
+  ["youdao", "有道"],
+  ["baidu", "百度"],
+]);
 
 const DictSearchItem = ({
   type,

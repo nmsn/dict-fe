@@ -6,11 +6,11 @@ const StyledSearchInput = styled.div`
   > input {
     width: 500px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: ${props => props.theme.borderRadius};
     padding: 5px;
     font-size: 18px;
     margin-right: 20px;
-    border: 1px solid skyblue;
+    border: 1px solid ${props => props.theme.themeTextColor};
   }
   
   display: flex;
@@ -20,7 +20,7 @@ const StyledSearchInput = styled.div`
 const StyledSearchBtn = styled.button`
   height: 40px;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: ${props => props.theme.borderRadius};
   background-color: skyblue;
   color: #fff;
   border: 0;
