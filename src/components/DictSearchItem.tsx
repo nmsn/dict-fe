@@ -13,23 +13,25 @@ const StyledSearchDictItem = styled.div`
     margin-bottom: 10px;
   }
 
-  .typeLabel {
+  .type {
     font-size: 28px;
   }
 `;
 
+const typeMap = new Map([['youdao', '有道'], ['baidu', '百度']]);
+
 const DictSearchItem = ({
-  typeLabel,
+  type,
   result,
   source,
 }: {
-  typeLabel: string;
+  type: string;
   result: string;
   source: string;
 }) => {
   return (
     <StyledSearchDictItem>
-      <div className="typeLabel">{typeLabel}</div>
+      <div className="type">{typeMap.get(type)}</div>
       <div className="source">{source}</div>
       <div className="result">{result}</div>
     </StyledSearchDictItem>

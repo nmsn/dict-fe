@@ -4,8 +4,7 @@ import styled from "styled-components";
 import DictSearchItem from "@/components/DictSearchItem";
 import DictSearchInput from "@/components/DictSearchInput";
 import DictStatItem from "@/components/DictStatItem";
-import { useQuery } from "react-query";
-import { getYoudao } from "@/service/dict";
+import { useState } from "react";
 
 const StyledPage = styled.div`
   width: 100vw;
@@ -37,7 +36,9 @@ const StyledBlockContainer2 = styled(StyledBlockContainer)`
   }
 `;
 
-const Home: NextPage = () => {
+const DictPage: NextPage = () => {
+  const [searchResult, setSearchResult] = useState([]);
+
   return (
     <StyledPage>
       <Head>
@@ -47,11 +48,13 @@ const Home: NextPage = () => {
       </Head>
       <StyledMain>
         <StyledBlockContainer>
-          <DictSearchInput />
+          <DictSearchInput onSave={setSearchResult} />
         </StyledBlockContainer>
+       
         <StyledBlockContainer>
-          <DictSearchItem typeLabel="百度" result="苹果" source="apple" />
-          <DictSearchItem typeLabel="有道" result="苹果" source="apple" />
+        {searchResult.map(({ query, translation, type }) => (
+          <DictSearchItem key={type} type={type} result={translation} source={query} />
+        ))}
         </StyledBlockContainer>
         <StyledBlockContainer2>
           <DictStatItem index="1" num="1" text="apple" />
@@ -62,4 +65,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default DictPage;

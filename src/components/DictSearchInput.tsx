@@ -2,27 +2,50 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import { getWord } from "@/service/dict";
 
-const StyledSearchInputItem = styled.div`
+const StyledSearchInput = styled.div`
   > input {
-    width: 600px;
+    width: 500px;
     height: 40px;
     border-radius: 10px;
     padding: 5px;
     font-size: 18px;
+    margin-right: 20px;
+    border: 1px solid skyblue;
   }
+  
+  display: flex;
+  align-items: center;
 `;
 
-const DictSearchInput = () => {
+const StyledSearchBtn = styled.button`
+  height: 40px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: skyblue;
+  color: #fff;
+  border: 0;
+`;
+
+const DictSearchInput = ({ onSave }) => {
   const inputRef = useRef(null);
-  
+
   const [data, setData] = useState("");
-  
+
   const getData = async (word: string) => {
-    const data = await getWord(word);
-    setData(data);
+    try {
+      const { code, data, msg } = await getWord(word);
+      const result = data.map(({ query, translation, type }) => ({
+        query,
+        translation,
+        type,
+      }));
+      setData(result);
+      onSave(result);
+    } catch (e) {
+      console.log(e);
+    }
   };
-  
-  
+
   const onChange = (e) => {
     setData(e.target.value);
   };
@@ -31,12 +54,12 @@ const DictSearchInput = () => {
     console.log(data);
     getData(data);
   };
-  
+
   return (
-    <StyledSearchInputItem>
-      <input onChange={onChange}/>
-      <button onClick={onClick}>123</button>
-    </StyledSearchInputItem>
+    <StyledSearchInput>
+      <input onChange={onChange} />
+      <StyledSearchBtn onClick={onClick}>确定</StyledSearchBtn>
+    </StyledSearchInput>
   );
 };
 
