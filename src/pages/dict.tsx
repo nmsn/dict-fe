@@ -6,6 +6,8 @@ import DictSearchItem from "@/components/DictSearchItem";
 import DictSearchInput from "@/components/DictSearchInput";
 import DictStatItem from "@/components/DictStatItem";
 
+import { getStat } from "../service/dict";
+
 const StyledPage = styled.div`
   width: 100vw;
   height: 100vh;
@@ -26,7 +28,7 @@ const StyledBlockContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const StyledBlockContainer2 = styled(StyledBlockContainer)`
+const StyledStatList = styled(StyledBlockContainer)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -44,9 +46,29 @@ const dictTheme = {
   itemPadding: "20px",
 };
 
-const DictPage: NextPage = () => {
-  const [searchResult, setSearchResult] = useState([]);
+interface QueryItemProps {
+  query: string;
+  count: number;
+}
 
+const QueryList = ({ data }: { data: QueryItemProps[] }) => {
+  return (
+    <StyledStatList>
+      {data.map(({ query, count }: QueryItemProps, index: number) => (
+        <DictStatItem
+          key={index.toString()}
+          index={index + 1}
+          num={count}
+          text={query}
+        />
+      ))}
+    </StyledStatList>
+  );
+};
+
+const DictPage: NextPage = ({ stat }) => {
+  const [searchResult, setSearchResult] = useState([]);
+  const { youdao, baidu } = stat;
   return (
     <StyledPage>
       <ThemeProvider theme={dictTheme}>
@@ -70,14 +92,31 @@ const DictPage: NextPage = () => {
               />
             ))}
           </StyledBlockContainer>
-          <StyledBlockContainer2>
-            <DictStatItem index="1" num="1" text="apple" />
-            <DictStatItem index="1" num="1" text="apple" />
-          </StyledBlockContainer2>
+          <StyledBlockContainer>
+            <QueryList data={youdao} />
+            <QueryList data={baidu} />
+          </StyledBlockContainer>
         </StyledMain>
       </ThemeProvider>
     </StyledPage>
   );
 };
+
+// 此函数在构建时被调用
+export async function getStaticProps() {
+  // 调用外部 API 获取博文列表
+  try {
+    const { data } = await getStat();
+    console.log(data);
+
+    return {
+      props: {
+        stat: data,
+      },
+    };
+  } catch (e) {
+    return {};
+  }
+}
 
 export default DictPage;

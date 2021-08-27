@@ -5,11 +5,12 @@ const StyledStatItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: ${props => props.theme.itemPadding};
-  width: 600px;
+  width: 300px;
   height: 50px;
   font-size: 18px;
   background: #f7ebb6;
   border-radius: ${props => props.theme.borderRadius};
+  margin: 0 10px;
 `;
 
 const DictStatItem = ({
@@ -17,8 +18,8 @@ const DictStatItem = ({
   num,
   text,
 }: {
-  index: string;
-  num: string;
+  index: string | number;
+  num: string | number;
   text: string;
 }) => {
   return (
